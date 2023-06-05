@@ -1,6 +1,8 @@
 const express = require('express');
-const {userRoutes}=require('./routes/userRoutes')
-const { default: mongoose } = require('mongoose');
+const { countryRoutes } = require('./routes/countryRoutes');
+const { writerRoutes } = require('./routes/writerRoutes');
+const { bookRoutes } = require('./routes/bookRoutes');
+
 const { db } = require('./config/db');
 const app = express();
 require('dotenv').config()
@@ -8,6 +10,13 @@ require('dotenv').config()
 db.connect();
 
 app.use(express.json())
+// app.use(fileUpload());
 
-app.use('/api/users', userRoutes)
-app.listen(3003);
+
+app.use('/api/country', countryRoutes)
+
+app.use('/api/writer', writerRoutes)
+app.use('/api/book', bookRoutes)
+
+
+app.listen(3009);

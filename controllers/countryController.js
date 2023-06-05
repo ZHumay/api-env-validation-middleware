@@ -1,10 +1,10 @@
-const { User } = require("../models/user")
+const { Country } = require("../models/Country");
 
 
-const userController = {
+const countryController = {
     getAll: (req, res) => {
 
-        User.find()
+        Country.find()
             .then(data => {
                 res.json(data);
             })
@@ -16,7 +16,7 @@ const userController = {
     getById: (req, res) => {
         let id = req.params.id;
 
-        User.findById(id)
+        Country.findById(id)
             .then(data => {
                 if (data)
                     res.json(data);
@@ -28,38 +28,34 @@ const userController = {
             })
     },
     add: (req, res) => {
-        let user = new User({
+        let country = new Country({
             name: req.body.name,
-            surname:req.body.surname,
-            email:req.body.email,
-            password:req.body.password
         })
 
-        user.save();
+        country.save();
 
-        res.json(user);
+        res.json(country);
     },
     deleteById: (req, res) => {
 
         let id = req.params.id;
 
-        User.findByIdAndDelete(id)
+        Country.findByIdAndDelete(id)
             .then(data => {
                 res.json(data)
             })
             .catch(err => {
                 res.status(500).json(err)
             })
+
+
     },
     update: (req, res) => {
         let id = req.params.id;
 
-        User.findById(id)
+        Country.findById(id)
             .then(data => {
-                data.name= req.body.name,
-                data.surname=req.body.surname,
-                data.email=req.body.email,
-                data.password=req.body.password,
+                data.name = req.body.name;
                 data.save();
 
                 res.json(data);
@@ -73,5 +69,5 @@ const userController = {
 
 
 module.exports = {
-   userController
+    countryController
 }
